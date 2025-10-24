@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::section}, 'Administración de Árboles')}">
+<head>
+    <title>Administración</title>
+</head>
+<body>
+    <section>
+        <div class="container my-4">
+            
+            <!-- Título y botón nuevo -->
+            <div class="row mb-4">
+                <div class="col-md-8">
+                    <h2 style="color: var(--verde-oscuro);">
+                        <i class="bi bi-gear-fill"></i> Gestión de Árboles
+                    </h2>
+                    <p class="text-muted">
+                        Total de árboles registrados: 
+                        <span class="badge" style="background-color: var(--verde-principal);" th:text="${totalArboles}">0</span>
+                    </p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <a th:href="@{/arbol/nuevo}" class="btn btn-success btn-lg">
+                        <i class="bi bi-plus-circle-fill"></i> Nuevo Árbol
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tabla de árboles -->
+            <div class="card">
+                <div class="card-header" style="background-color: var(--verde-principal); color: white;">
+                    <h5 class="mb-0"><i class="bi bi-table"></i> Listado de Árboles</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead style="background-color: var(--verde-menta);">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Imagen</th>
+                                    <th>Nombre</th>
+                                    <th>Tipo de Flor</th>
+                                    <th>Dureza</th>
+                                    <th>Altura (m)</th>
+                                    <th class="text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="arbol : ${arboles}">
+                                    <td><strong th:text="${arbol.idArbol}">1</strong></td>
+                                    <td>
+                                        <img th:if="${arbol.rutaImagen != null && !arbol.rutaImagen.isEmpty()}" 
+                                             th:src="@{/{ruta}(ruta=${arbol.rutaImagen})}" 
+                                             th:alt="${arbol.nombreArbol}"
+                                             style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+                                        <i th:if="${arbol.rutaImagen == null || arbol.rutaImagen.isEmpty()}" 
+                                           class="bi bi-tree" 
+                                           style="font-size: 2rem; color: var(--verde-claro);"></i>
+                                    </td>
+                                    <td>
+                                        <strong th:text="${arbol.nombreArbol}">Nombre</strong>
+                                    </td>
+                                    <td th:text="${arbol.tipoFlor != null ? arbol.tipoFlor : 'N/A'}">Tipo</td>
+                                    <td>
+                                        <span th:if="${arbol.durezaMadera != null}" th:text="${arbol.durezaMadera}">0</span>
+                                        <span th:if="${arbol.durezaMadera == null}" class="text-muted">N/A</span>
+                                    </td>
+                                    <td>
+                                        <span th:if="${arbol.alturaPromedio != null}" th:text="${arbol.alturaPromedio}">0</span>
+                                        <span th:if="${arbol.alturaPromedio == null}" class="text-muted">N/A</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="btn-group" role="group">
+                                            <a th:href="@{/arbol/modificar/} + ${arbol.idArbol}" 
+                                               class="btn btn-warning btn-sm">
+                                                <i class="bi bi-pencil-fill"></i> Editar
+                                            </a>
+                                            <button type="button" 
+                                                    class="btn btn-danger btn-sm"
+                                                    data-bs-toggle="modal" 
+                                                    th:data-bs-target="'#modalEliminar' + ${arbol.idArbol}">
+                                                <i class="bi bi-trash-fill"></i> Eliminar
+                                            </button>
+                                        </div>
+                                        
+                                        <!-- Modal de confirmación de eliminación -->
+                                        <div class="modal fade" th:id="'modalEliminar' + ${arbol.idArbol}" tabindex="-1">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-danger text-white">
+                                                        <h5 class="modal-title">
+                                                            <i class="bi bi-exclamation-triangle-fill"></i> Confirmar Eliminación
+                                                        </h5>
+                                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>¿Está seguro de eliminar el árbol <strong th:text="${arbol.nombreArbol}">nombre</strong>?</p>
+                                                        <p class="text-danger">
+                                                            <i class="bi bi-exclamation-triangle"></i> 
+                                                            Esta acción no se puede deshacer y eliminará también su imagen.
+                                                        </p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                        <form th:action="@{/arbol/eliminar}" method="post" style="display: inline;">
+                                                            <input type="hidden" name="idArbol" th:value="${arbol.idArbol}">
+                                                            <button type="submit" class="btn btn-danger">
+                                                                <i class="bi bi-trash-fill"></i> Eliminar
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr th:if="${arboles == null || arboles.isEmpty()}">
+                                    <td colspan="7" class="text-center text-muted py-5">
+                                        <i class="bi bi-inbox" style="font-size: 4rem; color: var(--verde-claro);"></i>
+                                        <p class="mt-3 fs-5">No hay árboles registrados</p>
+                                        <a th:href="@{/arbol/nuevo}" class="btn btn-success">
+                                            <i class="bi bi-plus-circle"></i> Agregar Primer Árbol
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</body>
+</html>
