@@ -11,7 +11,7 @@
     <groupId>tienda</groupId>
     <artifactId>tienda</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>tienda</name>
+    <name>practica01</name>
     <description>Tienda para curso de desarrollo web y patrones</description>
     <url/>
     <licenses>
