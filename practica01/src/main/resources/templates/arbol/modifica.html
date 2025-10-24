@@ -7,160 +7,159 @@
 <body>
     <section>
         <div class="container my-4">
-           
+            
             <div class="row justify-content-center">
                 <div class="col-md-10">
-                   
+                    
                     <!-- Título -->
                     <div class="card shadow-lg">
                         <div class="card-header" th:style="${arbol.idArbol != null ? 'background-color: #ffc107; color: #000;' : 'background-color: var(--verde-principal); color: white;'}">
                             <h4 class="mb-0">
-                                <i th:class="${arbol.idArbol != null ? 'bi bi-pencil-square' : 'bi bi-plus-circle-fill'}"></i>
+                                <i th:class="${arbol.idArbol != null ? 'bi bi-pencil-square' : 'bi bi-plus-circle-fill'}"></i> 
                                 <span th:text="${arbol.idArbol != null ? 'Modificar Árbol' : 'Nuevo Árbol'}">Formulario</span>
                             </h4>
                         </div>
                         <div class="card-body p-4">
-                           
+                            
                             <form th:action="@{/arbol/guardar}" th:object="${arbol}" method="post" enctype="multipart/form-data">
-                               
+                                
                                 <!-- ID oculto (solo para edición) -->
                                 <input type="hidden" th:field="*{idArbol}">
                                 <input type="hidden" th:field="*{rutaImagen}">
-                               
+                                
                                 <div class="row">
-                                   
+                                    
                                     <!-- Columna Izquierda -->
                                     <div class="col-md-6">
-                                       
+                                        
                                         <!-- Nombre del Árbol -->
                                         <div class="mb-3">
                                             <label for="nombreArbol" class="form-label">
-                                                <i class="bi bi-tree-fill" style="color: var(--verde-principal);"></i>
+                                                <i class="bi bi-tree-fill" style="color: var(--verde-principal);"></i> 
                                                 <strong>Nombre del Árbol</strong> <span class="text-danger">*</span>
                                             </label>
-                                            <input type="text"
-                                                   class="form-control form-control-lg"
-                                                   id="nombreArbol"
-                                                   th:field="*{nombreArbol}"
-                                                   required
+                                            <input type="text" 
+                                                   class="form-control form-control-lg" 
+                                                   id="nombreArbol" 
+                                                   th:field="*{nombreArbol}" 
+                                                   required 
                                                    maxlength="100"
                                                    placeholder="Ej: Roble, Cerezo, Pino">
                                         </div>
-                                       
+                                        
                                         <!-- Tipo de Flor -->
                                         <div class="mb-3">
                                             <label for="tipoFlor" class="form-label">
-                                                <i class="bi bi-flower1" style="color: var(--verde-claro);"></i>
+                                                <i class="bi bi-flower1" style="color: var(--verde-claro);"></i> 
                                                 <strong>Tipo de Flor</strong>
                                             </label>
-                                            <input type="text"
-                                                   class="form-control"
-                                                   id="tipoFlor"
-                                                   th:field="*{tipoFlor}"
+                                            <input type="text" 
+                                                   class="form-control" 
+                                                   id="tipoFlor" 
+                                                   th:field="*{tipoFlor}" 
                                                    maxlength="100"
                                                    placeholder="Ej: Blanca, Amarilla, Sin flor visible">
                                             <div class="form-text">Describe el color o tipo de flor del árbol</div>
                                         </div>
-                                       
+                                        
                                         <!-- Dureza de la Madera -->
                                         <div class="mb-3">
                                             <label for="durezaMadera" class="form-label">
-                                                <i class="bi bi-hammer" style="color: var(--verde-oscuro);"></i>
+                                                <i class="bi bi-hammer" style="color: var(--verde-oscuro);"></i> 
                                                 <strong>Dureza de la Madera</strong>
                                             </label>
-                                            <input type="text"
-                                                   class="form-control"
-                                                   id="durezaMadera"
-                                                   th:field="*{durezaMadera}"
-                                                   step="0.01"
+                                            <input type="text" 
+                                                   class="form-control" 
+                                                   id="durezaMadera" 
+                                                   th:field="*{durezaMadera}" 
+                                                   step="0.01" 
                                                    maxlength="100"
                                                    placeholder="Ej: Alta-Media-Blanda">
                                             <div class="form-text">Dureza de la madera</div>
                                         </div>
-                                       
+                                        
                                     </div>
-                                   
+                                    
                                     <!-- Columna Derecha -->
                                     <div class="col-md-6">
-                                       
+                                        
                                         <!-- Altura Promedio -->
                                         <div class="mb-3">
                                             <label for="alturaPromedio" class="form-label">
-                                                <i class="bi bi-rulers" style="color: var(--verde-claro);"></i>
+                                                <i class="bi bi-rulers" style="color: var(--verde-claro);"></i> 
                                                 <strong>Altura Promedio (metros)</strong>
                                             </label>
-                                            <input type="number"
-                                                   class="form-control"
-                                                   id="alturaPromedio"
-                                                   th:field="*{alturaPromedio}"
-                                                   step="0.01"
+                                            <input type="number" 
+                                                   class="form-control" 
+                                                   id="alturaPromedio" 
+                                                   th:field="*{alturaPromedio}" 
+                                                   step="0.01" 
                                                    min="0"
                                                    max="999.99"
                                                    placeholder="0.00">
                                             <div class="form-text">Altura promedio del árbol en metros</div>
                                         </div>
-                                       
+                                        
                                         <!-- Imagen del Árbol -->
                                         <div class="mb-3">
                                             <label for="imagenFile" class="form-label">
-                                                <i class="bi bi-image" style="color: var(--verde-principal);"></i>
+                                                <i class="bi bi-image" style="color: var(--verde-principal);"></i> 
                                                 <strong>Imagen del Árbol</strong>
                                             </label>
-                                            <input type="file"
-                                                   class="form-control form-control-lg"
-                                                   id="imagenFile"
+                                            <input type="file" 
+                                                   class="form-control form-control-lg" 
+                                                   id="imagenFile" 
                                                    name="imagenFile"
                                                    accept="image/*">
                                             <div class="form-text">Formatos: JPG, PNG, GIF (Máx. 10MB)</div>
                                         </div>
-                                       
+                                        
                                         <!-- Vista previa de imagen actual (solo en edición) -->
                                         <div th:if="${arbol.rutaImagen != null && !arbol.rutaImagen.isEmpty()}" class="mb-3">
                                             <label class="form-label">
                                                 <i class="bi bi-eye"></i> <strong>Imagen Actual</strong>
                                             </label>
                                             <div class="border rounded p-2 text-center" style="background-color: #f8f9fa;">
-                                                <img th:src="@{/{ruta}(ruta=${arbol.rutaImagen})}"
+                                                <img th:src="@{/{ruta}(ruta=${arbol.rutaImagen})}" 
                                                      th:alt="${arbol.nombreArbol}"
                                                      class="img-fluid rounded"
                                                      style="max-height: 150px;">
                                             </div>
                                         </div>
-                                       
+                                        
                                     </div>
-                                   
+                                    
                                 </div>
-                               
+                                
                                 <hr class="my-4">
-                               
+                                
                                 <!-- Información adicional -->
                                 <div class="alert alert-info" role="alert">
-                                    <i class="bi bi-info-circle-fill"></i>
+                                    <i class="bi bi-info-circle-fill"></i> 
                                     <strong>Nota:</strong> Los campos marcados con <span class="text-danger">*</span> son obligatorios.
                                     La imagen será guardada en el servidor.
                                 </div>
-                               
+                                
                                 <!-- Botones -->
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                     <a th:href="@{/arbol/listado}" class="btn btn-secondary btn-lg">
                                         <i class="bi bi-x-circle"></i> Cancelar
                                     </a>
                                     <button type="submit" class="btn btn-lg" th:classappend="${arbol.idArbol != null ? 'btn-warning' : 'btn-success'}">
-                                        <i class="bi bi-save-fill"></i>
+                                        <i class="bi bi-save-fill"></i> 
                                         <span th:text="${arbol.idArbol != null ? 'Actualizar Árbol' : 'Guardar Árbol'}">Guardar</span>
                                     </button>
                                 </div>
-                               
+                                
                             </form>
-                           
+                            
                         </div>
                     </div>
-                   
+                    
                 </div>
             </div>
-           
+            
         </div>
     </section>
 </body>
 </html>
- 

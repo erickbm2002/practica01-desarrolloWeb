@@ -1,5 +1,5 @@
 package practica01.controller;
- 
+
 import practica01.domain.Arbol;
 import practica01.services.ArbolService;
 import jakarta.validation.Valid;
@@ -16,17 +16,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
- 
+
 @Controller
 @RequestMapping("/arbol")
 public class ArbolController {
- 
+
     @Autowired
     private ArbolService arbolService;
-   
+    
     @Autowired
     private MessageSource messageSource;
-   
+    
     @GetMapping("/listado")
     public String listado(Model model) {
         var arboles = arbolService.getArboles();
@@ -34,20 +34,20 @@ public class ArbolController {
         model.addAttribute("totalArboles", arboles.size());
         return "/arbol/listado";
     }
- 
+
     @GetMapping("/nuevo")
     public String nuevo(Model model) {
         model.addAttribute("arbol", new Arbol());
         return "/arbol/modifica";
     }
- 
+
     @PostMapping("/guardar")
     public String guardar(@Valid Arbol arbol, @RequestParam("imagenFile") MultipartFile imagenFile, RedirectAttributes redirectAttributes) {
         arbolService.save(arbol, imagenFile);        
         redirectAttributes.addFlashAttribute("todoOk", messageSource.getMessage("mensaje.actualizado", null, Locale.getDefault()));
         return "redirect:/arbol/listado";
     }
- 
+
     @PostMapping("/eliminar")
     public String eliminar(@RequestParam Integer idArbol, RedirectAttributes redirectAttributes) {
         String titulo = "todoOk";
@@ -64,7 +64,7 @@ public class ArbolController {
         redirectAttributes.addFlashAttribute(titulo, messageSource.getMessage(detalle, null, Locale.getDefault()));
         return "redirect:/arbol/listado";
     }
- 
+
     @GetMapping("/modificar/{idArbol}")    
     public String modificar(@PathVariable("idArbol") Integer idArbol, Model model, RedirectAttributes redirectAttributes) {
         Optional<Arbol> arbolOpt = arbolService.getArbol(idArbol);
@@ -75,5 +75,5 @@ public class ArbolController {
         model.addAttribute("arbol", arbolOpt.get());
         return "arbol/modifica";
     }
- 
+
 }

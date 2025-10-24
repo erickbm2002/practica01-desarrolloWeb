@@ -15,11 +15,9 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 
-
 @Configuration
 public class ProjectConfig implements WebMvcConfigurer {
 
-    
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("index");
@@ -32,7 +30,6 @@ public class ProjectConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/static/images/");
     }
 
-    
     @Bean
     public SpringResourceTemplateResolver templateResolver_0() {
         SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
@@ -44,7 +41,6 @@ public class ProjectConfig implements WebMvcConfigurer {
         return resolver;
     }
 
-    
     @Bean
     public LocaleResolver localeResolver() {
         var slr = new SessionLocaleResolver();
@@ -54,7 +50,6 @@ public class ProjectConfig implements WebMvcConfigurer {
         return slr;
     }
 
-    
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
         var lci = new LocaleChangeInterceptor();
@@ -62,12 +57,10 @@ public class ProjectConfig implements WebMvcConfigurer {
         return lci;
     }
 
-    
     @Override
     public void addInterceptors(InterceptorRegistry registro) {
         registro.addInterceptor(localeChangeInterceptor());
     }
-    
     
     @Bean("messageSource")
     public MessageSource messageSource() {

@@ -7,7 +7,7 @@
 <body>
     <section>
         <div class="container my-4">
-           
+            
             <!-- Título y botón nuevo -->
             <div class="row mb-4">
                 <div class="col-md-8">
@@ -15,7 +15,7 @@
                         <i class="bi bi-gear-fill"></i> Gestión de Árboles
                     </h2>
                     <p class="text-muted">
-                        Total de árboles registrados:
+                        Total de árboles registrados: 
                         <span class="badge" style="background-color: var(--verde-principal);" th:text="${totalArboles}">0</span>
                     </p>
                 </div>
@@ -25,7 +25,7 @@
                     </a>
                 </div>
             </div>
- 
+
             <!-- Tabla de árboles -->
             <div class="card">
                 <div class="card-header" style="background-color: var(--verde-principal); color: white;">
@@ -49,12 +49,12 @@
                                 <tr th:each="arbol : ${arboles}">
                                     <td><strong th:text="${arbol.idArbol}">1</strong></td>
                                     <td>
-                                        <img th:if="${arbol.rutaImagen != null && !arbol.rutaImagen.isEmpty()}"
-                                             th:src="@{/{ruta}(ruta=${arbol.rutaImagen})}"
+                                        <img th:if="${arbol.rutaImagen != null && !arbol.rutaImagen.isEmpty()}" 
+                                             th:src="@{/{ruta}(ruta=${arbol.rutaImagen})}" 
                                              th:alt="${arbol.nombreArbol}"
                                              style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
-                                        <i th:if="${arbol.rutaImagen == null || arbol.rutaImagen.isEmpty()}"
-                                           class="bi bi-tree"
+                                        <i th:if="${arbol.rutaImagen == null || arbol.rutaImagen.isEmpty()}" 
+                                           class="bi bi-tree" 
                                            style="font-size: 2rem; color: var(--verde-claro);"></i>
                                     </td>
                                     <td>
@@ -71,18 +71,18 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="btn-group" role="group">
-                                            <a th:href="@{/arbol/modificar/} + ${arbol.idArbol}"
+                                            <a th:href="@{/arbol/modificar/} + ${arbol.idArbol}" 
                                                class="btn btn-warning btn-sm">
                                                 <i class="bi bi-pencil-fill"></i> Editar
                                             </a>
-                                            <button type="button"
+                                            <button type="button" 
                                                     class="btn btn-danger btn-sm"
-                                                    data-bs-toggle="modal"
+                                                    data-bs-toggle="modal" 
                                                     th:data-bs-target="'#modalEliminar' + ${arbol.idArbol}">
                                                 <i class="bi bi-trash-fill"></i> Eliminar
                                             </button>
                                         </div>
-                                       
+                                        
                                         <!-- Modal de confirmación de eliminación -->
                                         <div class="modal fade" th:id="'modalEliminar' + ${arbol.idArbol}" tabindex="-1">
                                             <div class="modal-dialog">
@@ -96,7 +96,7 @@
                                                     <div class="modal-body">
                                                         <p>¿Está seguro de eliminar el árbol <strong th:text="${arbol.nombreArbol}">nombre</strong>?</p>
                                                         <p class="text-danger">
-                                                            <i class="bi bi-exclamation-triangle"></i>
+                                                            <i class="bi bi-exclamation-triangle"></i> 
                                                             Esta acción no se puede deshacer y eliminará también su imagen.
                                                         </p>
                                                     </div>
@@ -128,7 +128,7 @@
                     </div>
                 </div>
             </div>
- 
+
         </div>
     </section>
 </body>

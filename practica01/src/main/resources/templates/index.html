@@ -7,7 +7,7 @@
 <body>
     <section>
         <div class="container my-5">
-
+            
             <!-- Banner de Bienvenida -->
             <div class="row mb-5">
                 <div class="col-12">
@@ -45,25 +45,24 @@
                                 <i class="bi bi-tree" style="font-size: 5rem; color: var(--verde-claro);"></i>
                             </div>
                         </div>
-
+                        
                         <div class="card-body">
                             <h5 class="card-title" style="color: var(--verde-principal);">
                                 <i class="bi bi-tree-fill"></i> 
                                 <span th:text="${arbol.nombreArbol}">Nombre del Árbol</span>
                             </h5>
-
+                            
                             <div class="mb-2">
                                 <strong style="color: var(--verde-oscuro);">
                                     <i class="bi bi-flower1"></i> Tipo de Flor:
                                 </strong>
                                 <span th:text="${arbol.tipoFlor != null ? arbol.tipoFlor : 'No especificada'}">-</span>
                             </div>
-
+                            
                             <div class="row">
                                 <div class="col-6">
                                     <small class="text-muted">
-                                        <i class="bi bi-rulers"></i> <strong>Altura:</strong>
-
+                                        <i class="bi bi-rulers"></i> <strong>Altura:</strong><br>
                                         <span th:if="${arbol.alturaPromedio != null}">
                                             <span th:text="${arbol.alturaPromedio}">0</span> m
                                         </span>
@@ -72,15 +71,14 @@
                                 </div>
                                 <div class="col-6">
                                     <small class="text-muted">
-                                        <i class="bi bi-hammer"></i> <strong>Dureza:</strong>
-
+                                        <i class="bi bi-hammer"></i> <strong>Dureza:</strong><br>
                                         <span th:if="${arbol.durezaMadera != null}" th:text="${arbol.durezaMadera}">0</span>
                                         <span th:if="${arbol.durezaMadera == null}">N/A</span>
                                     </small>
                                 </div>
                             </div>
                         </div>
-
+                        
                         <div class="card-footer bg-white border-0">
                             <div class="d-flex justify-content-between align-items-center">
                                 <span class="badge" style="background-color: var(--verde-claro);">
