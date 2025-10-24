@@ -1,13 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package practica01.repository;
 
-/**
- *
- * @author fstev
- */
-public class ArbolRepository {
-    
+import practica01.domain.Arbol;
+import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ArbolRepository extends JpaRepository<Arbol, Integer> {
+
+    // Buscar árboles por nombre (parcial, sin importar mayúsculas/minúsculas)
+    public List<Arbol> findByNombreArbolContainingIgnoreCase(String nombreArbol);
+
+    // Buscar árboles por tipo de flor
+    public List<Arbol> findByTipoFlorContainingIgnoreCase(String tipoFlor);
+
 }
